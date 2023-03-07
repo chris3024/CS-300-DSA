@@ -127,17 +127,18 @@ int partition(vector<Bid>& bids, int begin, int end) {
 
     // pick the middle element as pivot point
     int midpoint = low + (high - low) / 2;
+    string pivot = bids[midpoint].title;
     
     
     // while not done 
     bool done = false;
     while (!done) {
         // keep incrementing low index while bids[low] < bids[pivot]
-        while (bids.at(low).title < bids.at(midpoint).title) {
+        while (bids.at(low).title < pivot) {
             low++;
         }
         // keep decrementing high index while bids[pivot] < bids[high]
-        while (bids.at(midpoint).title < bids.at(high).title) {
+        while (pivot < bids.at(high).title) {
             high--;
         }
         /* If there are zero or one elements remaining,
@@ -169,18 +170,24 @@ int partition(vector<Bid>& bids, int begin, int end) {
  */
 void quickSort(vector<Bid>& bids, int begin, int end) {
     //set mid equal to 0
+    int midpoint = 0;
 
     /* Base case: If there are 1 or zero bids to sort,
      partition is already sorted otherwise if begin is greater
      than or equal to end then return*/
+    if (begin >= end) {
+        return;
+    }
 
     /* Partition bids into low and high such that
      midpoint is location of last element in low */
-     
+    int dataPartition = partition(bids, begin, end);
+
     // recursively sort low partition (begin to mid)
+    quickSort(bids, begin, dataPartition);
 
     // recursively sort high partition (mid+1 to end)
-
+    quickSort(bids, dataPartition + 1, end);
 }
 
 // FIXME (1a): Implement the selection sort logic over bid.title
@@ -286,6 +293,17 @@ int main(int argc, char* argv[]) {
         // FIXME (1b): Invoke the selection sort and report timing results
 
         // FIXME (2b): Invoke the quick sort and report timing results
+        case 4:
+
+            ticks = clock();
+
+            quickSort(bids, 0, bids.size() - 1);
+
+            ticks = clock() - ticks;
+
+            cout << bids.size() << " bids sorted" << endl;
+            cout << "time: " << ticks << " clock ticks" << endl;
+            cout << "time: " << ticks * 1.0 / CLOCKS_PER_SEC << " seconds" << endl;
 
         }
     }
