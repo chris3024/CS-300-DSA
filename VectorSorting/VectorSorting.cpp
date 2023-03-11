@@ -215,7 +215,18 @@ void selectionSort(vector<Bid>& bids) {
         // swap the current minimum with smaller one found
             // swap is a built in vector method
 
+    for (pos = 0; pos < bids.size() - 1; ++pos) {
+        
+        min = pos;
 
+        for (int i = pos + 1; i < bids.size(); ++i) {
+            if (bids.at(i).title < bids.at(pos).title) {
+                min = i;
+                swap(bids.at(pos), bids.at(min));
+            }
+        }
+
+    }
 }
 
 /**
@@ -243,7 +254,7 @@ int main(int argc, char* argv[]) {
         csvPath = argv[1];
         break;
     default:
-        csvPath = "eBid_Monthly_Sales_Dec_2016.csv";
+        csvPath = "eBid_Monthly_Sales.csv";
     }
 
     // Define a vector to hold all the bids
@@ -291,6 +302,18 @@ int main(int argc, char* argv[]) {
             break;
 
         // FIXME (1b): Invoke the selection sort and report timing results
+        case 3:
+            ticks = clock();
+
+            selectionSort(bids);
+
+            ticks = clock() - ticks;
+            cout << bids.size() << " bids sorted" << endl;
+            cout << "time: " << ticks << " clock ticks" << endl;
+            cout << "time: " << ticks * 1.0 / CLOCKS_PER_SEC << " seconds" << endl;
+
+            cout << endl;
+            break;
 
         // FIXME (2b): Invoke the quick sort and report timing results
         case 4:
@@ -305,6 +328,8 @@ int main(int argc, char* argv[]) {
             cout << "time: " << ticks << " clock ticks" << endl;
             cout << "time: " << ticks * 1.0 / CLOCKS_PER_SEC << " seconds" << endl;
 
+            cout << endl;
+            break;
         }
     }
 
