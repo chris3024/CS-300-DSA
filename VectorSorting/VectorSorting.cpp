@@ -111,7 +111,7 @@ vector<Bid> loadBids(string csvPath) {
     return bids;
 }
 
-// FIXME (2a): Implement the quick sort logic over bid.title
+
 
 /**
  * Partition the vector of bids into two parts, low and high
@@ -121,6 +121,7 @@ vector<Bid> loadBids(string csvPath) {
  * @param end Ending index to partition
  */
 int partition(vector<Bid>& bids, int begin, int end) {
+   
     //set low and high equal to begin and end
     int low = begin;
     int high = end;
@@ -130,24 +131,25 @@ int partition(vector<Bid>& bids, int begin, int end) {
     string pivot = bids[midpoint].title;
     
     
-    // while not done 
+    // Creating while loop will continue until the the bool value of done is returned true
     bool done = false;
     while (!done) {
-        // keep incrementing low index while bids[low] < bids[pivot]
+
+        // While loop that will increment while the low point is less than the pivot
         while (bids.at(low).title < pivot) {
             low++;
         }
-        // keep decrementing high index while bids[pivot] < bids[high]
+        // While loop that will decrement while the pivot point is less than the high point
         while (pivot < bids.at(high).title) {
             high--;
         }
-        /* If there are zero or one elements remaining,
-            all bids are partitioned. Return high */
-            // else swap the low and high bids (built in vector method)
-                 // move low and high closer ++low, --high
+        
+        // If low is greater than or equal to high the loop will end 
         if (low >= high) {
             done = true;
         }
+
+        // else the low and highs will be swapped, then low will increment and high will decrement 
         else {
             swap(bids.at(low), bids.at(high));
             low++;
@@ -169,6 +171,7 @@ int partition(vector<Bid>& bids, int begin, int end) {
  * @param end the ending index to sort on
  */
 void quickSort(vector<Bid>& bids, int begin, int end) {
+    
     //set mid equal to 0
     int midpoint = 0;
 
@@ -190,7 +193,7 @@ void quickSort(vector<Bid>& bids, int begin, int end) {
     quickSort(bids, dataPartition + 1, end);
 }
 
-// FIXME (1a): Implement the selection sort logic over bid.title
+
 
 /**
  * Perform a selection sort on bid title
@@ -200,25 +203,24 @@ void quickSort(vector<Bid>& bids, int begin, int end) {
  * @param bid address of the vector<Bid>
  *            instance to be sorted
  */
+
 void selectionSort(vector<Bid>& bids) {
+
     //define min as int (index of the current minimum bid)
     int min;
-    // check size of bids vector
-    // set size_t platform-neutral result equal to bid.size()
-    size_t pos = bids.size();
-    // pos is the position within bids that divides sorted/unsorted
-    // for size_t pos = 0 and less than size -1 
-        // set min = pos
-        // loop over remaining elements to the right of position
-            // if this element's title is less than minimum title
-                // this element becomes the minimum
-        // swap the current minimum with smaller one found
-            // swap is a built in vector method
 
+    // getting the size of the vector using size_t
+    size_t pos = bids.size();
+
+    // For loop initialization 
     for (pos = 0; pos < bids.size() - 1; ++pos) {
         
+        // setting the minimum position equal to the current position
         min = pos;
 
+        // using for loop the iterate through vector comparing to the current element to the previos element 
+        // if it is less than the new element is set as the new minimum
+        // and then they are swapped
         for (int i = pos + 1; i < bids.size(); ++i) {
             if (bids.at(i).title < bids.at(pos).title) {
                 min = i;
@@ -301,12 +303,16 @@ int main(int argc, char* argv[]) {
 
             break;
 
-        // FIXME (1b): Invoke the selection sort and report timing results
+        // Invoking the call to the selectionSort and displaying the relevant performance information
         case 3:
+
+            // Initializing timing 
             ticks = clock();
 
+            // Calling the method
             selectionSort(bids);
 
+            // Calculating elapsed time and displaying results
             ticks = clock() - ticks;
             cout << bids.size() << " bids sorted" << endl;
             cout << "time: " << ticks << " clock ticks" << endl;
@@ -315,15 +321,17 @@ int main(int argc, char* argv[]) {
             cout << endl;
             break;
 
-        // FIXME (2b): Invoke the quick sort and report timing results
+        // Invoking the call to the quickSort and displaying the relevant performance information
         case 4:
 
+            // Initializing timing 
             ticks = clock();
 
+            // Calling the method
             quickSort(bids, 0, bids.size() - 1);
 
+            // Calculating elapsed time and displaying results
             ticks = clock() - ticks;
-
             cout << bids.size() << " bids sorted" << endl;
             cout << "time: " << ticks << " clock ticks" << endl;
             cout << "time: " << ticks * 1.0 / CLOCKS_PER_SEC << " seconds" << endl;
