@@ -79,7 +79,7 @@ public:
  * Default constructor
  */
 LinkedList::LinkedList() {
-    // FIXME (1): Initialize housekeeping variables
+    
     //set head and tail equal to nullptr
     head = nullptr;
     tail = nullptr;
@@ -105,7 +105,7 @@ LinkedList::~LinkedList() {
  * Append a new bid to the end of the list
  */
 void LinkedList::Append(Bid bid) {
-    // FIXME (2): Implement append logic
+    
     //Create new node
     Node *newNode = new Node(bid);
 
@@ -174,7 +174,7 @@ void LinkedList::PrintList() {
  * @param bidId The bid id to remove from the list
  */
 void LinkedList::Remove(string bidId) {
-    // FIXME (5): Implement remove logic
+    
     Node* currNode = head;
     // special case if matching node is the head
         // make head point to the next node in the list
@@ -186,6 +186,15 @@ void LinkedList::Remove(string bidId) {
         size--;
         return;
     }
+
+    // start at the head
+    // while loop over each node looking for a match
+        // if the next node bidID is equal to the current bidID
+            // hold onto the next node temporarily
+            // make current node point beyond the next node
+            // now free up memory held by temp
+            // decrease size count
+            //return
     while (currNode != nullptr) {
         if (bidId == currNode->next->bid.bidId) {
             Node* tempNode = currNode->next;
@@ -194,20 +203,15 @@ void LinkedList::Remove(string bidId) {
             size--;
             return;
         }
+
+        // current node is equal to next node
         currNode = currNode->next;
     }
 
-    // start at the head
-    // while loop over each node looking for a match
-        // if the next node bidID is equal to the current bidID
-        	// hold onto the next node temporarily
-         // make current node point beyond the next node
-         // now free up memory held by temp
-         // decrease size count
-         //return
+    
 
-    // curretn node is equal to next node
-    }
+    
+}
 
 
 /**
@@ -216,7 +220,12 @@ void LinkedList::Remove(string bidId) {
  * @param bidId The bid id to search for
  */
 Bid LinkedList::Search(string bidId) {
-    // FIXME (6): Implement search logic
+    
+    // special case if matching node is the head
+    // start at the head of the list
+    // keep searching until end reached with while loop (current != nullptr)
+        // if the current node matches, current bid
+        // else current node is equal to next node
     Node* currNode = head;
 
     while (currNode != nullptr) {
@@ -227,14 +236,6 @@ Bid LinkedList::Search(string bidId) {
     }
     return Bid();
 
-    // special case if matching node is the head
-     
-
-    // start at the head of the list
-
-    // keep searching until end reached with while loop (current != nullptr)
-        // if the current node matches, current bid
-        // else current node is equal to next node
 
     //the next two statements will only execute if search item is not found
     //create new empty bid
