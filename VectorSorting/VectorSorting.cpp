@@ -43,7 +43,7 @@ struct Bid {
  */
 void displayBid(Bid bid) {
     cout << bid.bidId << ": " << bid.title << " | " << bid.amount << " | "
-            << bid.fund << endl;
+        << bid.fund << endl;
     return;
 }
 
@@ -105,7 +105,8 @@ vector<Bid> loadBids(string csvPath) {
             // push this bid to the end
             bids.push_back(bid);
         }
-    } catch (csv::Error &e) {
+    }
+    catch (csv::Error& e) {
         std::cerr << e.what() << std::endl;
     }
     return bids;
@@ -121,7 +122,7 @@ vector<Bid> loadBids(string csvPath) {
  * @param end Ending index to partition
  */
 int partition(vector<Bid>& bids, int begin, int end) {
-   
+
     //set low and high equal to begin and end
     int low = begin;
     int high = end;
@@ -129,8 +130,8 @@ int partition(vector<Bid>& bids, int begin, int end) {
     // pick the middle element as pivot point
     int midpoint = low + (high - low) / 2;
     string pivot = bids[midpoint].title;
-    
-    
+
+
     // Creating while loop will continue until the the bool value of done is returned true
     bool done = false;
     while (!done) {
@@ -143,7 +144,7 @@ int partition(vector<Bid>& bids, int begin, int end) {
         while (pivot < bids.at(high).title) {
             high--;
         }
-        
+
         // If low is greater than or equal to high the loop will end 
         if (low >= high) {
             done = true;
@@ -157,7 +158,7 @@ int partition(vector<Bid>& bids, int begin, int end) {
         }
 
     }
-        
+
     return high;
 }
 
@@ -171,7 +172,7 @@ int partition(vector<Bid>& bids, int begin, int end) {
  * @param end the ending index to sort on
  */
 void quickSort(vector<Bid>& bids, int begin, int end) {
-    
+
     //set mid equal to 0
     int midpoint = 0;
 
@@ -214,7 +215,7 @@ void selectionSort(vector<Bid>& bids) {
 
     // For loop initialization 
     for (pos = 0; pos < bids.size() - 1; ++pos) {
-        
+
         // setting the minimum position equal to the current position
         min = pos;
 
@@ -303,7 +304,7 @@ int main(int argc, char* argv[]) {
 
             break;
 
-        // Invoking the call to the selectionSort and displaying the relevant performance information
+            // Invoking the call to the selectionSort and displaying the relevant performance information
         case 3:
 
             // Initializing timing 
@@ -321,7 +322,7 @@ int main(int argc, char* argv[]) {
             cout << endl;
             break;
 
-        // Invoking the call to the quickSort and displaying the relevant performance information
+            // Invoking the call to the quickSort and displaying the relevant performance information
         case 4:
 
             // Initializing timing 
