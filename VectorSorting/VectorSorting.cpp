@@ -1,6 +1,6 @@
 //============================================================================
 // Name        : VectorSorting.cpp
-// Author      : Your name
+// Author      : Christopher Sharp
 // Version     : 1.0
 // Copyright   : Copyright © 2017 SNHU COCE
 // Description : Vector Sorting Algorithms
